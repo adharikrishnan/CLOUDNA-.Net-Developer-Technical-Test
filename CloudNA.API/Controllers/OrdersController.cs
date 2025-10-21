@@ -19,6 +19,12 @@ public class OrdersController : ControllerBase
     public async Task<IActionResult> GetOrder(GetOrderRequest request)
     {
         var response = await _orderService.GetOrder(request);
+
+        if (!response.Success)
+        {
+            return NotFound(response.ErrorMessage);
+        }
+        
         return Ok(response);
     }
 }

@@ -5,29 +5,35 @@ namespace CloudNA.API.Extensions;
 
 public static class MappingExtensions
 {
-    public static GetOrderResponse MapToOrderResponse(this CustomerDto customerDto, OrderDto orderDto)
+    public static GetOrderResponse MapToOrderResponse(this CustomerDto customerDto, OrderDto? orderDto)
     {
         Customer customer = new Customer()
         {
             FirstName = customerDto.FirstName,
             LastName = customerDto.LastName,
         };
-        
-        var orderItems = orderDto.OrderItems.Select(x => new OrderItem()
-        {
-            Product = x.Product,
-            Quantity = x.Quantity,
-            Price = x.Price,
-        }).ToList();
 
-        Order order = new Order()
+        Order? order = null;
+
+        if (orderDto is not null)
         {
-            OrderId = orderDto.OrderId,
-            OrderDate = orderDto.OrderDate,
-            OrderItems = orderItems,
-            DeliveryAddress = orderDto.DeliveryAddress,
-            DeliveryExpected = orderDto.DeliveryExpected,
-        };
+            var orderItems = orderDto?.OrderItems.Select(x => new OrderItem()
+            {
+                Product = x.Product,
+                Quantity = x.Quantity,
+                Price = x.Price,
+            }).ToList();
+
+            order = new Order()
+            {
+                OrderId = orderDto.OrderId,
+                OrderDate = orderDto.OrderDate,
+                OrderItems = orderItems ?? new List<OrderItem>(),
+                DeliveryAddress = orderDto.DeliveryAddress,
+                DeliveryExpected = orderDto.DeliveryExpected,
+            };
+        }
+        
 
         return new GetOrderResponse()
         {

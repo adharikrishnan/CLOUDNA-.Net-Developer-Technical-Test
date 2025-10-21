@@ -7,10 +7,12 @@ CREATE OR ALTER PROCEDURE dbo.Get_Products
     @OrderId INT    
 AS
 BEGIN
-    SELECT p.Name, oi.Price, oi.Quantity
-    FROM OrderItems oi 
+    SELECT IIF(o.ContainsGift = 1, 'Gift', p.Name) AS Product, oi.Price, oi.Quantity
+    FROM Orders o 
+    INNER JOIN OrderItems oi 
+        ON o.OrderId = oi.Orderid
     INNER JOIN Products p 
         ON oi.Productid = p.ProductId
-    WHERE Orderid = @OrderId        
+    WHERE Orderid = @OrderId;           
 END
 
