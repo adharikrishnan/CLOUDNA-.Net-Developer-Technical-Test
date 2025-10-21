@@ -14,12 +14,24 @@ public class OrderDataAccess : IOrderDataAccess
         _connectionString = config.GetSection("ConnectionString:OrderDbConnectionString").Value ?? throw new NullReferenceException();
     }
     
-    public async Task<CustomerOrderDto> GetCustomerOrder(string customerId)
+    public async Task<OrderDto?> GetCustomerOrder(string customerId)
     {
         await using var connection = new SqlConnection(_connectionString);
-        var parameters = new { CustomerId = customerId };
+        var orderParameters = new { CustomerId = customerId };
         
+        var order = await connection
+            .QueryFirstOrDefaultAsync<OrderDto>("EXEC dbo.Get_Order", orderParameters).ConfigureAwait(false);
+
+        if (order is null) 
+            return order;
         
+        var prodcutParametes = new { OrderId = order.OrderId };
+        var products = await connection
+            .QueryAsync<OrderItemDto>("EXEC dbo.Get_Products", prodcutParametes).ConfigureAwait(false);
+            
+        order.OrderItems.AddRange(products);
+
+        return order;
     }
 
     public async Task<CustomerDto?> GetCustomer(string customerId, string email)

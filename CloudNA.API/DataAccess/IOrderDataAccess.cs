@@ -5,7 +5,7 @@ namespace CloudNA.API.DataAccess;
 
 public interface IOrderDataAccess
 {
-    Task<CustomerOrderDto> GetCustomerOrder(string customerId);
+    Task<OrderDto?> GetCustomerOrder(string customerId);
     
     Task<CustomerDto?> GetCustomer(string customerId, string email);
 }

@@ -13,7 +13,7 @@ public class OrderDto
     
     public required string DeliveryAddress { get; init; }
     
-    public List<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
+    public List<OrderItemDto> OrderItems { get; set; } = new List<OrderItemDto>();
     
     public DateTime DeliveryExpected { get; set; }
 }
