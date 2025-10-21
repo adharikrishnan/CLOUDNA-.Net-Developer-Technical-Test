@@ -1,4 +1,7 @@
+using System.Data.SqlClient;
 using CloudNA.API.Models.Dto;
+using CloudNA.API.Models.Response;
+using Dapper;
 
 namespace CloudNA.API.DataAccess;
 
@@ -13,11 +16,18 @@ public class OrderDataAccess : IOrderDataAccess
     
     public async Task<CustomerOrderDto> GetCustomerOrder(string customerId)
     {
-        throw new NotImplementedException();
+        await using var connection = new SqlConnection(_connectionString);
+        var parameters = new { CustomerId = customerId };
+        
+        
     }
 
     public async Task<CustomerDto?> GetCustomer(string customerId, string email)
     {
-        throw new NotImplementedException();
+        await using var connection = new SqlConnection(_connectionString);
+        var parameters = new { CustomerId = customerId, Email = email };
+        var customer = await connection
+            .QueryFirstOrDefaultAsync<CustomerDto>("EXEC dbo.Get_Customer", parameters).ConfigureAwait(false);
+        return customer;
     }
 }

@@ -6,7 +6,7 @@ namespace CloudNA.API.Services;
 
 public class OrderService : IOrderService
 {
-    public async Task<GetOrderResponse> GetOrder(GetOrderRequest request)
+    public async Task<Result<GetOrderResponse>> GetOrder(GetOrderRequest request)
     {
         
     }

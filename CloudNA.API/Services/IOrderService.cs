@@ -6,5 +6,5 @@ namespace CloudNA.API.Services;
 
 public interface IOrderService
 {
-    Task<GetOrderResponse> GetOrder(GetOrderRequest request);
+    Task<Result<GetOrderResponse>> GetOrder(GetOrderRequest request);
 }
