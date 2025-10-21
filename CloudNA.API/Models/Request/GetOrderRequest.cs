@@ -1,4 +1,4 @@
-namespace CloudNA.API.Models;
+namespace CloudNA.API.Models.Request;
 
 /// <summary>
 /// The Get Order Request Model.

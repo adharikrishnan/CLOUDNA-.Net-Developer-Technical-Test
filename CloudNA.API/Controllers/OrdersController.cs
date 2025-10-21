@@ -1,3 +1,6 @@
+using CloudNA.API.Models;
+using CloudNA.API.Models.Request;
+using CloudNA.API.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CloudNA.API.Controllers;
@@ -6,9 +9,16 @@ namespace CloudNA.API.Controllers;
 [Route("[controller]")]
 public class OrdersController : ControllerBase
 {
-    [HttpGet("get")]
-    public async Task<IActionResult> GetOrder()
+    private readonly IOrderService _orderService;
+    public OrdersController(IOrderService orderService)
     {
-        return Ok();
+        _orderService = orderService;
+    }
+    
+    [HttpGet("get")]
+    public async Task<IActionResult> GetOrder(GetOrderRequest request)
+    {
+        var response = await _orderService.GetOrder(request);
+        return Ok(response);
     }
 }

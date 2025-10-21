@@ -1,11 +1,11 @@
 CREATE TABLE Customers
 (
-    CustomerId VARCHAR(10) PRIMARY KEY,
-    Firstname  VARCHAR(50),
-    Lastname   VARCHAR(50),
-    Email      VARCHAR(100),
-    HouseNo    VARCHAR(10),
-    Street     VARCHAR(100),
-    Town       VARCHAR(50),
-    PostCode   VARCHAR(20)
+    Customerid NVARCHAR(10) PRIMARY KEY,
+    Firstname  NVARCHAR(50),
+    Lastname   NVARCHAR(50),
+    Email      NVARCHAR(50),
+    Houseno    NVARCHAR(50),
+    Street     NVARCHAR(50=0),
+    Town       NVARCHAR(50),
+    Postcode   NVARCHAR(10)
 )

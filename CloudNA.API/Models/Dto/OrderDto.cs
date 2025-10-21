@@ -1,18 +1,19 @@
-using System.Text.Json.Serialization;
+using CloudNA.API.Models.Response;
 
-namespace CloudNA.API.Models;
+namespace CloudNA.API.Models.Dto;
 
-public class Order
+/// <summary>
+/// Order Dto class.
+/// </summary>
+public class OrderDto
 {
-    public long OrderId { get; init; }
+    public int OrderId { get; init; }
     
-    [JsonConverter(typeof(JsonStringEnumConverter))]
     public DateTime OrderDate { get; init; }
     
     public required string DeliveryAddress { get; init; }
     
     public List<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
     
-    [JsonConverter(typeof(JsonStringEnumConverter))]
     public DateTime DeliveryExpected { get; set; }
 }

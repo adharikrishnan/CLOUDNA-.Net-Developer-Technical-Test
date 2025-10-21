@@ -1,4 +1,4 @@
-namespace CloudNA.API.Models;
+namespace CloudNA.API.Models.Response;
 
 /// <summary>
 /// The Customer Model
