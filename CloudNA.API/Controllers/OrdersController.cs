@@ -15,7 +15,7 @@ public class OrdersController : ControllerBase
         _orderService = orderService;
     }
     
-    [HttpGet("get")]
+    [HttpPost("get")]
     public async Task<IActionResult> GetOrder(GetOrderRequest request)
     {
         var response = await _orderService.GetOrder(request);

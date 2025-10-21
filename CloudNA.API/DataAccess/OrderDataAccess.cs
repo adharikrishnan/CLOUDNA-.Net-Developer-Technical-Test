@@ -11,7 +11,7 @@ public class OrderDataAccess : IOrderDataAccess
     
     public OrderDataAccess(IConfiguration config)
     {
-        _connectionString = config.GetSection("ConnectionString:OrderDbConnectionString").Value ?? throw new NullReferenceException();
+        _connectionString = config.GetSection("ConnectionString:OrderDbConnectionString").Value ?? throw new NullReferenceException("Connection string not set");
     }
     
     public async Task<OrderDto?> GetCustomerOrder(string customerId)
